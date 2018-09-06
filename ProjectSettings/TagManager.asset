@@ -14,13 +14,13 @@ TagManager:
   - 
   - 
   - PostProcessing
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Player
+  - Ally
+  - Neutral
+  - Enemy
+  - Building
+  - Environment
+  - Terrain
   - 
   - 
   - 
