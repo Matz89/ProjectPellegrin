@@ -55,7 +55,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1663218102431824}
-  m_LocalRotation: {x: 0.040691722, y: -0.9519361, z: 0.14533184, w: 0.26653427}
+  m_LocalRotation: {x: -0.040406037, y: -0.576493, z: 0.028560236, w: -0.8156025}
   m_LocalPosition: {x: 0.042, y: -0.016, z: 0.005}
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_Children: []
@@ -218,6 +218,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b7b86a0d834adf45a4373a66d36d4eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  modelAnimator: {fileID: 95096321105025990}
+  walkSpeed: 2
+  runSpeed: 3
+  canMove: 1
   targetToChase: {fileID: 0}
 --- !u!135 &135218088642019228
 SphereCollider:
@@ -300,7 +304,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300038, guid: 2074c57bbb65b9b44a37c2e7bf41b852, type: 3}
+  m_Sprite: {fileID: 21300020, guid: 2074c57bbb65b9b44a37c2e7bf41b852, type: 3}
   m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0

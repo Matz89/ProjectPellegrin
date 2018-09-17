@@ -1,38 +1,22 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Pellegrin.Characters
 {
     /// <summary>
     /// A simple Input controller for detecting player actions.
     /// </summary>
-    [RequireComponent(typeof(Rigidbody))]
-    [RequireComponent(typeof(Collider))]
-    public class PlayerController : CharacterController
+ 
+    public class PlayerController : UnitController
     {
-        private const int SPEED_DIVISOR = 10;  //TODO understand this better to rename appropriately
-
-        /// <summary>
-        /// A character's walking speed.
-        /// </summary>
-        public float walkSpeed = 2f;
-        /// <summary>
-        /// A character's running speed.
-        /// </summary>
-        public float runSpeed = 3f;
-
-        /// <summary>
-        /// Determines if this character can move.
-        /// </summary>
-        public bool canMove = true;
-
-        private Rigidbody rb;
-
+        
 
         void Start()
         {
-            rb = transform.GetComponent<Rigidbody>();
+            //TODO check if were okay with doing this, try not to inherrit this class?
+            //base.Start();
+            rb = GetComponent<Rigidbody>();
         }
-        
 
         void Update()
         {
@@ -40,44 +24,51 @@ namespace Pellegrin.Characters
 
         void FixedUpdate()
         {
-            HandleMove();
+            //Check move direction
+            Vector3 moveDirection = FindMoveDirection();
+
+            //rotate to move direction
+            RotateToFacing(moveDirection);
+
+            //get rate speed
+            float speed = GetSpeed();
+
+            //Move in direction at speed
+            MoveInDirection(moveDirection, speed);
         }
 
-        void HandleMove()
+        protected override Vector3 FindMoveDirection()
         {
-            if (canMove)
-            {
-                var speed = walkSpeed;
+            var moveHorizontal = 0f;
+            var moveVertical = 0f;
 
+            if (canMove) //TODO decide if required for class?  should we check super is unit can move?
+            {
                 // detect input movement
-                var moveHorizontal = Input.GetAxis("Horizontal");
-                var moveVertical = Input.GetAxis("Vertical");
+                moveHorizontal = Input.GetAxis("Horizontal");
+                moveVertical = Input.GetAxis("Vertical");
                 IsMoving = moveHorizontal != 0 || moveVertical != 0;
 
-                IsRunning = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
-                if(IsRunning)
-                {
-                    speed = runSpeed;
-                }
+            }
 
-                // rotate the character
-                Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
-                Vector3 rot = movement * (speed / SPEED_DIVISOR);
+            return new Vector3(moveHorizontal, 0, moveVertical);
+        }
 
-                if (movement != Vector3.zero)
-                {
-                    var newRotation = Quaternion.LookRotation(rot);
-                    rb.rotation = Quaternion.RotateTowards(transform.rotation, newRotation, 360f);
-                }
-                
+        protected override float GetSpeed()
+        {
 
-                // move the character
-                movement *= (speed / SPEED_DIVISOR);
+            //check if Running
+            IsRunning = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
 
-                var characterMovement = transform.position + movement;
-                rb.MovePosition(characterMovement);
-
+            if(IsRunning)
+            {
+                return runSpeed;
+            }
+            else
+            {
+                return walkSpeed;
             }
         }
+
     }
 }

@@ -1,22 +1,31 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class AIController : MonoBehaviour {
+namespace Pellegrin.Characters
+{
+
+    public class AIController : UnitController {
 
 
-    NavMeshAgent navMeshAgent;
-    [SerializeField] GameObject targetToChase;
+        NavMeshAgent navMeshAgent;
+        [SerializeField] GameObject targetToChase;
 
-	// Use this for initialization
-	void Start () {
-        navMeshAgent = GetComponent<NavMeshAgent>();
+	    // Use this for initialization
+	    void Start () {
+            navMeshAgent = GetComponent<NavMeshAgent>();
         
-	}
+	    }
 	
-	// Update is called once per frame
-	void Update () {
-        navMeshAgent.destination = targetToChase.transform.position;
+	    // Update is called once per frame
+	    void Update () {
+
+            //Find destination to move to
+            navMeshAgent.destination = targetToChase.transform.position;
+        }
+
     }
+
 }

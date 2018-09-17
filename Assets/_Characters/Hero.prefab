@@ -38,10 +38,10 @@ GameObject:
   - component: {fileID: 4426081081218064}
   - component: {fileID: 54917336427328332}
   - component: {fileID: 135085353993447982}
-  - component: {fileID: 114380661170294938}
   - component: {fileID: 95296566106469000}
   - component: {fileID: 136843982087856082}
   - component: {fileID: 114602985947483418}
+  - component: {fileID: 136609466180421714}
   m_Layer: 10
   m_Name: Hero
   m_TagString: Untagged
@@ -55,7 +55,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1563503945842344}
-  m_LocalRotation: {x: 0.07692732, y: -0.9060885, z: 0.18774426, w: 0.37126544}
+  m_LocalRotation: {x: 0.03177854, y: -0.93738043, z: 0.3352827, w: 0.08884617}
   m_LocalPosition: {x: 0, y: -1.02, z: 0}
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_Children: []
@@ -109,27 +109,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &114380661170294938
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1812208780159526}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3d345c04df54e6c438302f61486683f7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  modelAnimator: {fileID: 95296566106469000}
-  walkSpeed: 2
-  runSpeed: 3
-  jumpVelocity: 90
-  groundDistanceOffset: 0.1
-  attackCollider: {fileID: 136843982087856082}
-  canMove: 1
-  canJump: 1
-  canAttack: 1
-  attackCooldown: 0.2
 --- !u!114 &114602985947483418
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -251,10 +230,23 @@ SphereCollider:
   m_GameObject: {fileID: 1812208780159526}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!136 &136609466180421714
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1812208780159526}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 1.4
+  m_Direction: 1
+  m_Center: {x: 0, y: -0.38, z: 0}
 --- !u!136 &136843982087856082
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -303,7 +295,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300026, guid: 2074c57bbb65b9b44a37c2e7bf41b852, type: 3}
+  m_Sprite: {fileID: 21300038, guid: 2074c57bbb65b9b44a37c2e7bf41b852, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
