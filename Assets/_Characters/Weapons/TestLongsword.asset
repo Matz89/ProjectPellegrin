@@ -9,7 +9,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 60fafcc88baa17446a37487493490d1c, type: 3}
-  m_Name: Longsword_remade
+  m_Name: TestLongsword
   m_EditorClassIdentifier: 
   billboard: 0
   directionMode: 1
@@ -103,19 +103,4 @@ MonoBehaviour:
       - {fileID: 0}
       - {fileID: 0}
       - {fileID: 0}
-      - {fileID: 0}
-  - stateName: Jump
-    frameCount: 1
-    directions:
-    - direction: 1
-      frames:
-      - {fileID: 0}
-    - direction: 5
-      frames:
-      - {fileID: 0}
-    - direction: 9
-      frames:
-      - {fileID: 0}
-    - direction: 13
-      frames:
       - {fileID: 0}

@@ -6,12 +6,13 @@ namespace Pellegrin.Characters
     /// <summary>
     /// The character controller used to update an Animator.
     /// </summary>
-    [RequireComponent(typeof(Rigidbody))]
-    [RequireComponent(typeof(Collider))]
+    [RequireComponent(typeof(Rigidbody))] //TODO refactor out to not need this
+    [RequireComponent(typeof(Collider))] //TODO refactor out to not ned this
     public class UnitController : MonoBehaviour
     {
 
         private const int SPEED_DIVISOR = 10;  //TODO understand this better to rename appropriately, originally came from playerController, check if can be eliminated
+        private const float COOLDOWN_DONE = 0f;
 
         /// <summary>
         /// The sprite manager this controller updates.
@@ -21,16 +22,62 @@ namespace Pellegrin.Characters
         /// <summary>
         /// A character's walking speed.
         /// </summary>
-        public float walkSpeed = 2f;
+        [SerializeField] float baseWalkSpeed = 2f;
+        public float BaseWalkSpeed
+        {
+            get
+            {
+                return baseWalkSpeed;
+            }
+        }
         /// <summary>
         /// A character's running speed.
         /// </summary>
-        public float runSpeed = 3f;
+        [SerializeField] float baseRunSpeed = 3f;
+        public float BaseRunSpeed
+        {
+            get
+            {
+                return baseRunSpeed;
+            }
+        }
+
+        [SerializeField] WeaponConfig currentWeapon;
+        public WeaponConfig MyCurrentWeapon
+        {
+            get
+            {
+                //Check/update for new weapon 
+                currentWeapon = GetComponent<CanEquipWeapon>().EquippedWeapon;
+                //TODO do I need to check for a weapon every time its used? will it ever change in mid-battle?
+                return currentWeapon;
+            }
+        }
 
         /// <summary>
         /// Determines if this character can move.
         /// </summary>
-        public bool canMove = true;
+        [SerializeField] bool canMove = true;
+        public bool CanMove
+        {
+            get
+            {
+                return canMove;
+            }
+            set
+            {
+                canMove = value;
+            }
+        }
+
+        [SerializeField] bool canAttack = true;
+        public bool CanAttack
+        {
+            get
+            {
+                return canAttack;
+            }
+        }
 
         /// <summary>
         /// Gets or sets whether a character is moving in the current frame.
@@ -48,6 +95,7 @@ namespace Pellegrin.Characters
                 modelAnimator.SetBool("IsMoving", value);
             }
         }
+
         /// <summary>
         /// Gets or sets whether a character is running in the current frame.
         /// </summary>
@@ -65,17 +113,27 @@ namespace Pellegrin.Characters
             }
         }
 
+        private bool attackStarted;
+        public bool AttackStarted
+        {
+            get
+            {
+                return attackStarted;
+            }
+            set
+            {
+                attackStarted = value;
+                modelAnimator.SetBool("AttackStarted", value);
+            }
+        }
+
         protected Rigidbody rb;
+
+        protected float timeSinceLastWeaponAttack = 1.0f;
 
         void Start()
         {
-            rb = GetComponent<Rigidbody>();
-        }
-
-
-        void FixedUpdate()
-        {
-            //TODO should this only be inherited, and not used?
+            rb = GetComponent<Rigidbody>(); 
         }
 
 
@@ -98,7 +156,7 @@ namespace Pellegrin.Characters
 
         virtual protected float GetSpeed()
         {
-            return walkSpeed;
+            return baseWalkSpeed;
         }
 
         virtual protected void MoveInDirection(Vector3 direction, float speed)
@@ -108,6 +166,28 @@ namespace Pellegrin.Characters
 
             rb.MovePosition(characterMovement);
         }
+
+        protected void AttackWithWeapon()
+        {
+            
+
+            if (timeSinceLastWeaponAttack <= COOLDOWN_DONE)
+            {
+                timeSinceLastWeaponAttack = MyCurrentWeapon.GetTimeBetweenAttacks();
+            }
+            else
+            {
+                AttackStarted = false;
+            }
+        }
+
+        protected void UpdateWeaponAttackTimer()
+        {
+            timeSinceLastWeaponAttack -= Time.deltaTime;
+
+        }
+
+        
 
 
     }

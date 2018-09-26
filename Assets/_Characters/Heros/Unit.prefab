@@ -46,7 +46,7 @@ GameObject:
   - component: {fileID: 136139447875067594}
   - component: {fileID: 114683195072260772}
   m_Layer: 0
-  m_Name: Hero
+  m_Name: Unit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -246,7 +246,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   orderInLayer: 5
-  weaponConfig: {fileID: 11400000, guid: 85ea9af7154e6724e8f6d13b1505b107, type: 2}
+  equippedWeapon: {fileID: 0}
 --- !u!114 &114842782534908802
 MonoBehaviour:
   m_ObjectHideFlags: 1

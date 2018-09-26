@@ -11,6 +11,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e18e8d37b1ba794f8d7661722414d5d, type: 3}
   m_Name: Longsword
   m_EditorClassIdentifier: 
-  weaponSpriteState: {fileID: 11400000, guid: 37a8ba2166ec8cc41aa929a546b9ffca, type: 2}
-  timeBetweenSwings: 1
+  weaponSpriteState: {fileID: 11400000, guid: 69e1fd7678e4b6e48acbb4c0987d3037, type: 2}
+  attackCooldown: 0.2
   weaponDamage: 10

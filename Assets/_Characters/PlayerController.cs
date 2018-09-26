@@ -19,6 +19,26 @@ public class PlayerController : UnitController
 
     void Update()
     {
+        HandleAttack();
+        
+    }
+
+    private void HandleAttack()
+    {
+        if (CanAttack)
+        {
+            AttackStarted = Input.GetButtonDown("Fire1");
+
+            if (AttackStarted)
+            {
+                AttackWithWeapon();
+            }
+            else
+            {
+                UpdateWeaponAttackTimer();
+            }
+            
+        }
     }
 
     void FixedUpdate()
@@ -41,7 +61,7 @@ public class PlayerController : UnitController
         var moveHorizontal = 0f;
         var moveVertical = 0f;
 
-        if (canMove) //TODO decide if required for class?  should we check super is unit can move?
+        if (CanMove) //TODO decide if required for class?  should we check super is unit can move?
         {
             // detect input movement
             moveHorizontal = Input.GetAxis("Horizontal");
@@ -61,11 +81,11 @@ public class PlayerController : UnitController
 
         if(IsRunning)
         {
-            return runSpeed;
+            return BaseRunSpeed;
         }
         else
         {
-            return walkSpeed;
+            return BaseWalkSpeed;
         }
     }
 

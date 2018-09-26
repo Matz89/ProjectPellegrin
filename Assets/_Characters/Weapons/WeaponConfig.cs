@@ -9,12 +9,12 @@ namespace Pellegrin.Characters
     public class WeaponConfig : ScriptableObject
     {
         [SerializeField] SpriteManagerState weaponSpriteState;
-        [SerializeField] float timeBetweenSwings = 1f;
+        [SerializeField] float attackCooldown = 1f;
         [SerializeField] float weaponDamage;
 
-        public float GetTimeBetweenAnimationCycles()
+        public float GetTimeBetweenAttacks()
         {
-            return timeBetweenSwings;
+            return attackCooldown;
         }
 
         public SpriteManagerState GetWeaponSpriteState()

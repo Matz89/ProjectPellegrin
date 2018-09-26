@@ -12,8 +12,15 @@ namespace Pellegrin.Characters
     {
 
         [SerializeField] int orderInLayer;  //TODO find way to remove this
-        [SerializeField] WeaponConfig weaponConfig;
-        //[SerializeField] 
+        [SerializeField] WeaponConfig equippedWeapon;
+        public WeaponConfig EquippedWeapon
+        {
+            get
+            {
+                return equippedWeapon;
+            }
+        }
+        
 
         // Use this for initialization
         void Start()
@@ -34,7 +41,7 @@ namespace Pellegrin.Characters
             weaponSpriteManager.rootManager = rootSpriteManager;
 
             //Load weapon's Spritestate
-            weaponSpriteManager.CopyFrom(weaponConfig.GetWeaponSpriteState());
+            weaponSpriteManager.CopyFrom(equippedWeapon.GetWeaponSpriteState());
 
             //Attach to rootSpriteManager's game object
             weapon.transform.SetParent(rootSpriteManager.transform);
